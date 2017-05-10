@@ -3,11 +3,14 @@ class AddUserUseCase {
 	let db = UserDatabase()
 
 	func add(name: String, password: String, premium: Bool, newsletter: Bool) -> Result<User, UserError> {
-		let user = User(name: name, password: password, premium: premium, newsletter: newsletter)
 
-		let validator = UserValidator.Name && UserValidator.Password && (UserValidator.Newsletter || UserValidator.Premium)
+		let userResult = ????
 
-		return validator(user).map(db.create)
+		let userValidator = UserValidator.Premium || UserValidator.Newsletter
+		
+		let userValidation = userResult.flatMap(userValidator)
+
+		userValidation.map(db.create)
 	}
 }
 
