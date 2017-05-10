@@ -14,4 +14,8 @@ public enum Result<S, E> {
 			return transform(value)
 		}
 	}
+
+	public static func pure<A>(a: A) -> Result<A, E> {
+		return .Success(a)
+	}
 }
