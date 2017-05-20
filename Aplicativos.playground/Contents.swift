@@ -14,7 +14,7 @@ class AddUserUseCase {
 		
 		let userValidation = userResult.flatMap(userValidator)
 
-		userValidation.map(db.create)
+		return userValidation.map(db.create)
 	}
 }
 
