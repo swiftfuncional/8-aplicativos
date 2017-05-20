@@ -19,3 +19,14 @@ public enum Result<S, E> {
 		return .Success(a)
 	}
 }
+
+public func curryUser(_ name: String) -> (String) -> (Bool) -> (Bool) -> User {
+	return {
+		password in {
+			premium in {
+				newsletter in
+				User(name: name, password: password, premium: premium, newsletter: newsletter)
+			}
+		}
+	}
+}
