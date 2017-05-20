@@ -20,12 +20,14 @@ public enum Result<S, E> {
 	}
 }
 
-public func curryUser(_ name: String) -> (String) -> (Bool) -> (Bool) -> User {
+public func curry<A, B, C, D, E>(_ fn: @escaping (A, B, C, D) -> E) -> (A) -> (B) -> (C) -> (D) -> E {
 	return {
-		password in {
-			premium in {
-				newsletter in
-				User(name: name, password: password, premium: premium, newsletter: newsletter)
+		a in {
+			b in {
+				c in {
+					d in
+					fn(a, b, c, d)
+				}
 			}
 		}
 	}
