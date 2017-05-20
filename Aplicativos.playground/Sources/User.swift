@@ -21,19 +21,7 @@ public enum UserError {
 
 public class UserValidator {
 
-	public static var all = [Name, Password, (Premium || Newsletter)]
-
-	public class var Name: Validator<User, UserError> {
-		return validate(.UsernameOutOfBounds) {
-			!$0.name.isEmpty && $0.name.characters.count <= 15
-		}
-	}
-
-	public class var Password: Validator<User, UserError> {
-		return validate(.PasswordTooShort) {
-			$0.password.characters.count >= 10
-		}
-	}
+	public static var all = [(Premium || Newsletter)]
 
 	public class var Premium: Validator<User, UserError> {
 		return validate(.MustBePremium) {
@@ -44,6 +32,21 @@ public class UserValidator {
 	public class var Newsletter: Validator<User, UserError> {
 		return validate(.MustBeSubscribeToNewsletter) {
 			$0.newsletter
+		}
+	}
+}
+
+public class CommonValidator {
+
+	public class var Name: Validator<String, UserError> {
+		return validate(.UsernameOutOfBounds) {
+			!$0.isEmpty && $0.characters.count <= 15
+		}
+	}
+
+	public class var Password: Validator<String, UserError> {
+		return validate(.PasswordTooShort) {
+			$0.characters.count >= 10
 		}
 	}
 }
