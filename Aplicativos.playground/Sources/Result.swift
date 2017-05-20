@@ -23,7 +23,7 @@ public enum Result<S, E> {
 		}
 	}
 
-	public static func pure<A>(a: A) -> Result<A, E> {
+	public static func pure(_ a: S) -> Result<S, E> {
 		return .Success(a)
 	}
 }
