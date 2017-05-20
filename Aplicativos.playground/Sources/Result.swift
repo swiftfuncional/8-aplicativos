@@ -21,14 +21,5 @@ public enum Result<S, E> {
 }
 
 public func curry<A, B, C, D, E>(_ fn: @escaping (A, B, C, D) -> E) -> (A) -> (B) -> (C) -> (D) -> E {
-	return {
-		a in {
-			b in {
-				c in {
-					d in
-					fn(a, b, c, d)
-				}
-			}
-		}
-	}
+	return { a in { b in { c in { d in fn(a, b, c, d) } } } }
 }

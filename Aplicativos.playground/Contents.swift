@@ -4,7 +4,7 @@ class AddUserUseCase {
 
 	func add(name: String, password: String, premium: Bool, newsletter: Bool) -> Result<User, UserError> {
 
-		let userResult = ????
+		let userResult = CommonValidator.Name(name).map(curry(User.init))
 
 		let userValidator = UserValidator.Premium || UserValidator.Newsletter
 		
