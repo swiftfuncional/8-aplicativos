@@ -15,6 +15,14 @@ public enum Result<S, E> {
 		}
 	}
 
+	public func apply<T>(_ resultST: Result<(S) -> T, E>) -> Result<T, E> {
+		return self.flatMap { s in
+			resultST.map { ab in
+				ab(s)
+			}
+		}
+	}
+
 	public static func pure<A>(a: A) -> Result<A, E> {
 		return .Success(a)
 	}
