@@ -9,12 +9,9 @@ class AddUserUseCase {
 			<*> CommonValidator.Password(password)
 			<*> Result.pure(premium)
 			<*> Result.pure(newsletter)
+			>>= UserValidator.Premium || UserValidator.Newsletter
 
-		let userValidator = UserValidator.Premium || UserValidator.Newsletter
-		
-		let userValidation = userResult.flatMap(userValidator)
-
-		return userValidation.map(db.create)
+		return userResult.map(db.create)
 	}
 }
 
