@@ -4,11 +4,11 @@ class AddUserUseCase {
 
 	func add(name: String, password: String, premium: Bool, newsletter: Bool) -> Result<User, UserError> {
 
-		let userResult = Result.pure(newsletter)
-			.apply(Result.pure(premium)
-				.apply(CommonValidator.Password(password)
-					.apply(CommonValidator.Name(name)
-						.map(curry(User.init)))))
+		let userResult = curry(User.init)
+			<%> CommonValidator.Name(name)
+			<*> CommonValidator.Password(password)
+			<*> Result.pure(premium)
+			<*> Result.pure(newsletter)
 
 		let userValidator = UserValidator.Premium || UserValidator.Newsletter
 		
