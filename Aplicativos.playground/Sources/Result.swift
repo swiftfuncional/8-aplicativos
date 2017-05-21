@@ -35,3 +35,10 @@ public func curry<A, B, C, D, E>(_ fn: @escaping (A, B, C, D) -> E) -> (A) -> (B
 infix operator <*>: AdditionPrecedence
 infix operator <%>: AdditionPrecedence
 
+public func <%><A, B, E>(_ transform: @escaping (A) -> B, resultA: Result<A, E>) -> Result<B, E> {
+	return resultA.map(transform)
+}
+
+public func <*><A, B, E>(_ curriedResult: Result<(A) -> B, E>, resultA: Result<A, E>) -> Result<B, E> {
+	return resultA.apply(curriedResult)
+}
