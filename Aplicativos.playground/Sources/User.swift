@@ -18,35 +18,3 @@ public enum UserError {
 	case MustBePremium
 	case MustBeSubscribeToNewsletter
 }
-
-public class UserValidator {
-
-	public static var all = [(Premium || Newsletter)]
-
-	public class var Premium: Validator<User, UserError> {
-		return validate(.MustBePremium) {
-			$0.premium
-		}
-	}
-
-	public class var Newsletter: Validator<User, UserError> {
-		return validate(.MustBeSubscribeToNewsletter) {
-			$0.newsletter
-		}
-	}
-}
-
-public class CommonValidator {
-
-	public class var Name: Validator<String, UserError> {
-		return validate(.UsernameOutOfBounds) {
-			!$0.isEmpty && $0.characters.count <= 15
-		}
-	}
-
-	public class var Password: Validator<String, UserError> {
-		return validate(.PasswordTooShort) {
-			$0.characters.count >= 10
-		}
-	}
-}
