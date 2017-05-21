@@ -42,3 +42,7 @@ public func <%><A, B, E>(_ transform: @escaping (A) -> B, resultA: Result<A, E>)
 public func <*><A, B, E>(_ curriedResult: Result<(A) -> B, E>, resultA: Result<A, E>) -> Result<B, E> {
 	return resultA.apply(curriedResult)
 }
+
+public func >>=<A, B, E>(_ resultA: Result<A, E>, transform: (A) -> Result<B, E>) -> Result<B, E> {
+	return resultA.flatMap(transform)
+}
